@@ -4,13 +4,17 @@ def caesar_chiper(phrase, number)
     alpha = ['a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z']
     chiper = ''
     phrase.each_char do |i|
-       if alpha.include?(i) then
-            shift = alpha.index(phrase[i])+number
+       if alpha.include?(i.downcase) then
+            shift = alpha.index(i.downcase) + number
             if shift > alpha.length then
                 shift = shift - alpha.length 
             end
             newletter = alpha[shift]
-            chiper.to_s <<  newletter.to_s
+            if alpha.include?(i) then
+                chiper.to_s <<  newletter.to_s
+            else
+                chiper.to_s << newletter.to_s.upcase 
+            end
        else
             chiper.to_s << i.to_s
        end
@@ -19,4 +23,4 @@ def caesar_chiper(phrase, number)
 end
  
 #Cipher (phrase and shift)
-caesar_chiper('what a string!', 5)
+caesar_chiper('What string!', 5)
